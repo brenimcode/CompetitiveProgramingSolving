@@ -30,6 +30,6 @@ int main()
         }
     }
     cout << v;
-    
+    free(gabarito);
     
 }
