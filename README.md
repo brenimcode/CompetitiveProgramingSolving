@@ -14,4 +14,3 @@ Exercicios resolvidos de Neps Academy<br/>
 Os exercicios foram resolvidos em:
 
 - C++
-- C
