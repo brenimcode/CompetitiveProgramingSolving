@@ -7,56 +7,58 @@ int main()
     int t, i, j, tam;
     bool ver = true;
     string cadeia;
-    stack<char> pilha;
+    stack <char> pilha;
     cin >> t;
     cin.ignore();
     for (i = 0; i < t; i++)
     {
-        cin >> cadeia;
-
+        
+        getline(cin, cadeia);
+        
         tam = cadeia.size();
         for (j = 0; j < tam; j++)
         {
-            if      (cadeia[j] == '('){
-                pilha.push('(');
-            }
-            else if (cadeia[j] == ')')
+            switch (cadeia[j])
             {
+            case '(':
+            case '[':
+            case '{':
+                pilha.push(cadeia[j]);
+                break;
+            case ')':
                 if (pilha.empty())
                 {
                     ver = false;
                     continue;
                 }
-                if (pilha.top() == '(')
+                if (pilha.top() == '('){
                     pilha.pop();
-            }
-            else if (cadeia[j] == '['){
-                pilha.push('[');
-            }
-            else if (cadeia[j] == ']')
-            {
-                if (pilha.empty())
+                }
+                break;
+            case ']':
+             if (pilha.empty())
                 {
                     ver = false;
                     continue;
                 }
-                if (pilha.top() == '[')
+                if (pilha.top() == '['){
                     pilha.pop();
-            }
-            else if (cadeia[j] == '{'){
-                pilha.push('{');
-            }
-            else if (cadeia[j] == '}')
-            {
-                if (pilha.empty())
+                }
+                break;
+            case '}':
+            if (pilha.empty())
                 {
                     ver = false;
                     continue;
                 }
-                if (pilha.top() == '{')
+                if (pilha.top() == '{'){
                     pilha.pop();
+                }
+                break;
+            default:
+                break;
             }
-
+            
         }
 
         if (pilha.empty() && ver == true)
@@ -68,4 +70,6 @@ int main()
             pilha.pop();
         ver = true;
     }
+
+    return 0;
 }
