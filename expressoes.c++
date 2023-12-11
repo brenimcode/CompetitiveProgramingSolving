@@ -34,6 +34,8 @@ int main()
                 if (pilha.top() == '('){
                     pilha.pop();
                 }
+                else
+                    ver=false;
                 break;
             case ']':
              if (pilha.empty())
@@ -44,6 +46,8 @@ int main()
                 if (pilha.top() == '['){
                     pilha.pop();
                 }
+                else
+                    ver = false;
                 break;
             case '}':
             if (pilha.empty())
@@ -54,6 +58,8 @@ int main()
                 if (pilha.top() == '{'){
                     pilha.pop();
                 }
+                else
+                    ver = false;
                 break;
             default:
                 break;

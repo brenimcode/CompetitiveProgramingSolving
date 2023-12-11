@@ -1,40 +1,45 @@
 #include <bits/stdc++.h> // biblioteca magica
-#include <iostream>
 
 using namespace std;
 
 int main(){
-    int c,n,j,i;
+    int c,n,i;
     cin >> c >> n;
-    pair <int,int> aux;
-    pair <int, int> instalados[c];
-    pair <int, int> disponiveis[n];
+    int aux1,aux2;
+    map <int,int> instalados;
+    map <int,int> disponiveis;
     for (i = 0; i < c; i++)
     {
-        cin >> aux.first;
-        cin >> aux.second;
-        instalados[i] = aux;
+        cin >> aux1;
+        cin >> aux2;
+        instalados.insert(make_pair(aux1,aux2));
+    }
+    map <int,int>:: iterator temp;
+    for (i = 0; i < n; i++)
+    {
+        cin >> aux1;
+        cin >> aux2;
+        temp = disponiveis.find(aux1);
+        if(temp != disponiveis.end()){
+            if(aux2 > (*temp).second){
+                disponiveis.erase(temp);
+            }
+            else{
+                continue;
+            }
+        }
+        disponiveis.insert(make_pair(aux1,aux2));
     }
 
-    for (i = 0; i < n; i++)
-    {
-        cin >> aux.first;
-        cin >> aux.second;
-        disponiveis[i] = aux;
-    }
     cout << endl;
-   
-    
-    for (i = 0; i < n; i++)
+    map <int,int>:: iterator it;
+
+    for (it = disponiveis.begin(); it != disponiveis.end(); it++)
     {
-        for (j = 0; j < c; j++)
-        {
-            if(disponiveis[i].first == instalados[i].first)
-                if(disponiveis[i].second > instalados[i].second)
-                    cout << disponiveis[i].first << ' ' <<disponiveis[i].second;
-            
-        }
-        
+        temp = instalados.find((*it).first); //temp é o programa instalado, it é disp
+    
+        if((*temp).second < (*it).second)
+            printf("%d %d\n",(*it).first, (*it).second);
     }
 
 }
