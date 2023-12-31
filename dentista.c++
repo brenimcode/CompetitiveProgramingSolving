@@ -2,24 +2,31 @@
 
 using namespace std;
 
+pair <int,int> consultas[10100];
+
+bool ordenar(pair<int,int> a, pair<int,int> b){
+    return a.second < b.second;
+}
 
 int main()
 {
-    int n,i,a,b;
+    int n,i,ini,fim,livre=0;
     cin >> n;
-    pair <int,int> consultas[n];
-    int quantidade = 1;
-    for (i = 0; i < n; i++)
+    
+    int quantidade = 0;
+    for (i = 1; i <= n; i++)
     {
-        cin >> a >> b;
-        consultas[i] = {a,b};
+        cin >> ini >> fim;
+        consultas[i] = {ini,fim};
     }
-    for (i = 0; i < n; i++)
+    sort(consultas+1,consultas+n+1,ordenar);
+
+    for (i = 1; i <= n; i++)
     {
         
-        if(consultas[i].second <= consultas[i+1].first){
-            //da pra fazer essa parada.
+        if(consultas[i].first >= livre ){
             quantidade++;
+            livre = consultas[i].second;
         } 
     }
     cout << quantidade;
