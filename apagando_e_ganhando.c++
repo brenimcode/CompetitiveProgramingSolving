@@ -1,23 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
-    int n, d, cont,i;
-    string s, s2;
-    while(cin>>n>>d){
-        if(n==0 && d==0)
+int main() {
+    int n, d;
+
+    while (cin >> n >> d) {
+        if (n == 0 && d == 0) {
             return 0;
-        cin>>s;//3759
-        cont=d;
-        for(i=0; i<s.size(); i++){
-            while(s2.size()>0 && s[i]>s2.back() && cont>0 ){
-                cont--;
-                s2.pop_back();
-            }
-            if(s2.size()<n-d)
-                s2.push_back(s[i]);//s2=3
         }
-        cout << s2 << endl;
-        s2="";
+        int i,end=n-d,apagador=d;
+        string num;
+        cin >> num;
+
+        stack <char> result;
+        // Encontrar os d menores dígitos e armazená-los em uma nova string
+        for ( i = 0;i<n;i++) {
+
+            while (apagador > 0 && !result.empty() && result.top() < num[i] ) {
+                result.pop();
+                apagador--; //isso garante que ele apague exatos D numeros
+            }
+            if( (int) result.size() < end)
+                result.push(num[i]);
+        }
+        stack <char> pilha;
+        while (!result.empty())
+        {
+            pilha.push(result.top());
+            result.pop();
+        }
+
+        while (!pilha.empty())
+        {
+            cout << pilha.top();
+            pilha.pop();
+        }
+        cout << '\n';
     }
+
+    return 0;
 }
