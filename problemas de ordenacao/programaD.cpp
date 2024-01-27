@@ -5,14 +5,14 @@ using namespace std;
 typedef struct marca{
     string nome;
     int votos;
-    int ocorrencia;
+    //int ocorrencia;
 }marca;
 
 bool ordenar(marca a, marca b){
-	if(a.votos != b.votos){
+	//if(a.votos != b.votos){
         return a.votos > b.votos;
-    }
-    return a.ocorrencia < b.ocorrencia;
+   // }
+    //return a.ocorrencia < b.ocorrencia;
 }
 
 int main(){
@@ -37,7 +37,7 @@ int main(){
         if(ver == 0){
             marca temp;
             temp.nome = aux;
-            temp.ocorrencia = i;
+            //temp.ocorrencia = i;
             temp.votos = 1;
             vet.push_back(temp);
         }

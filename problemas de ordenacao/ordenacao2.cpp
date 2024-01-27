@@ -2,24 +2,35 @@
 
 using namespace std;
 
-int InsertionSORT(string vet, int tam){
-    int i,j,temp;
-    int cont=0;
-    // Se ordenado O(N), se não O(N^2)
-    for (i = 1; i < tam; i++)
-    {
-        temp = vet[i];
-        for (j = i-1; j >= 0 && vet[j] < temp; j--)
-        {
-            vet[j+1] = vet[j];
-            cont++;
+int insertionSort(string lista, int tamanho) {
+    int i,j,aux;
+    int trocas=0;
+    int comp = 0;
+    for(i=0; i<tamanho-1; i++) {
+      	comp++;
+        if(lista[i]>lista[i+1]) {
+           aux=lista[i+1];
+           lista[i+1]=lista[i];
+		   lista[i]=aux;
+           j=i-1;
+           trocas++;
+           while(j>=0){
+		   	  comp++;
+		   	  if(aux<lista[j]){
+                 lista[j+1]=lista[j];
+		         lista[j]=aux;
+			     trocas++;
+			  } else {
+			  	 break;
+			  }
+			  j=j-1;
+		   }
         }
-        vet[j+1] = temp;
-        
     }
-    return cont;
-
+    return comp;
 }
+
+
 
 
 int main(){   
@@ -31,7 +42,7 @@ int main(){
     {
         string s;
         getline(cin,s);
-        printf("[%d]\n",InsertionSORT(s,s.size()));
+        printf("[%d]\n",insertionSort(s,s.size()));
     }
     
     return 0;
