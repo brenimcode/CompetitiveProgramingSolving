@@ -25,9 +25,8 @@ void dfsR(int vertice){
 void GrafoDSR(int n){
     cont=0;//Para assinar em qual momento o vertice foi visitado.
     int i; 
-    for(i = 0;i<n;i++){
+    for(i = 0;i<n;i++)
         visitados[i] = -1;
-    }
 
     for(i = 1;i<n;i++){
         if(visitados[i] == -1)
