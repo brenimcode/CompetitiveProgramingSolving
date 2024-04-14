@@ -9,7 +9,7 @@ vector <bool> e_composto(2147483648,false);
 void crivo(ll n)
 {
     ll i,j;
-    e_composto[1] = 1; // o vetor guarda NAO primo. [0] - PRIMO, [1] - !PRIMO
+    e_composto[1] = 1; // o vetor guarda NAO primo. [0] é PRIMO, [1] - nao é PRIMO
     for ( i = 2; i*i <= n; ++i)
     {
         if (!e_composto[i])

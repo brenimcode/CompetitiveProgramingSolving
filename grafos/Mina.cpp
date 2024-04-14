@@ -1,87 +1,77 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-typedef pair<int, int> pii;// para não termos que digitar pair<int, int> várias vezes,
-// fazemos isso para deixar o código mais organizado
-
-//---------------------
+#define par pair<int, int>	// (i,j)
+typedef pair<int, par> pii; // par(distancia, (x,y))
 #define MAXN 105
-#define INFINITO 999999999
+#define INF 9999997
 
-int n; // DIMENSAO da matriz
-int distancia[MAXN][MAXN];  // o array de distâncias à fonte
-int processado[MAXN][MAXN]; // o array que guarda se um vértice foi processado
+int n;						// DIMENSAO da matriz
+int dist[MAXN][MAXN];		// o array de distâncias à fonte
 vector<pii> vizinhos[MAXN]; // nossas listas de adjacência. O primeiro elemento do par representa a distância e o segundo representa o vértice
 int mat[MAXN][MAXN];
-//---------------------
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Usado para rodar pelos VIZINHOS:
+int dlinha[4] = {0, 0, 1, -1};
+int dcoluna[4] = {1, -1, 0, 0};
 
-void Dijkstra(int x, int y){
-	for(int i = 0;i <= n;i++) for(int j = 0;j <= n;j++) distancia[i][j] = INFINITO;
-	distancia[x][y] = 0; // Assim, garantimos que o primeiro vértice selecionado será o próprio S.
-	
-	priority_queue< pii, vector<pii>, greater<pii> > fila; // Criamos uma fila de prioridade onde o menor fica no topo.
-	fila.push( pii(distancia[S], S) );// Como se pode ver, colocamos o primeiro elemento como sendo a distância do
-	// vértice a S e o segundo como sendo o próprio vértice (dist, Vi)
-	
-	while(true){ // rodar "infinitamente"
+int Dijkstra()
+{
+	memset(dist, INF, sizeof(dist)); // inicializa TODOS C INFINITO
+	dist[1][1] = 0;					 // Assim, garantimos que o primeiro vértice selecionado será o próprio S.
+
+	priority_queue<pii, vector<pii>, greater<pii>> fila; // Criamos uma fila de prioridade onde o menor fica no topo.
+
+	fila.push(pii(0, par(1, 1))); // coloco o primeiro na fila, DIST = 0, e vertice = (1,1)
+
+	while (!fila.empty())
+	{
+		// pega o elemento topo, e tira
+		int d = fila.top().first, i = fila.top().second.first, j = fila.top().second.second;
+		fila.pop();
+
+		// se o elemento já tiver sido processado,continue.
+		if (d > dist[i][j]) continue;
 		
-		int davez = -1;
-		int menor = INFINITO;
-		
-		// selecionamos o vértice mais próximo
-		while(!fila.empty()){
-			
-			int atual = fila.top().second;
-			fila.pop();
-			
-			if(!processado[atual]){ // podemos usar esse vértice porque ele ainda não foi processado
-				davez = atual;
-				break;
-			}
-			
-			// se não, continuamos procurando
-		}
-		
-		if(davez == -1) break; // se não achou ninguém, é o fim do algoritmo
-		
-		processado[davez] = true; // marcamos para não voltar para este vértice
-		
-		// agora, tentamos atualizar as distâncias
-		for(int i = 0;i < (int)vizinhos[davez].size();i++){
-			
-			int dist  = vizinhos[davez][i].first;
-			int atual = vizinhos[davez][i].second;
-			
-			// A nova possível distância é distancia[davez] + dist.
-			// Comparamos isso com distancia[atual]
-			
-			if( distancia[atual] > distancia[davez] + dist ){  // vemos que vale a pena usar o vértice davez
-				distancia[atual] = distancia[davez] + dist; // atualizamos a distância
-				fila.push( pii(distancia[atual], atual) );  // inserimos na fila de prioridade
+		for (int k = 0; k < 4; k++)
+		{
+			int iV = i + dlinha[k]; // Fazendo isso vamos pegar todos os adjascentes
+			int jV = j + dcoluna[k];
+			// vejo se ele está no limite da matriz
+			if (iV >= 1 && iV <= n && jV >= 1 && jV <= n && mat[iV][jV] + dist[i][j] < dist[iV][jV])
+			{
+				dist[iV][jV] = mat[iV][jV] + dist[i][j];
+				// adiciono na fila para o processa-lo
+				fila.push(pii(dist[iV][jV], par(iV, jV)));
 			}
 		}
 	}
-	
+	return dist[n][n];
 }
 
-int main(){
-	int i,j;
-	cin >> n;
+	int main()
+	{
+		int i, j;
+		cin >> n;
 
-	for( i = 0;i < n;i++){
-        for ( j = 0; j < n; j++)
-        {
-            cin  >> [i][j];
-        }
-        
+		for (i = 1; i <= n; i++)
+		{
+			for (j = 1; j <= n; j++)
+			{
+				cin >> mat[i][j];
+			}
+		}
+		
+		cout << Dijkstra() << endl; // imprimimos a resposta
+
+	for (i = 1; i <= n; i++)
+		{
+			for (j = 1; j <= n; j++)
+			{
+				cout << dist[i][j] << ' ';
+			}
+			cout << endl;
+		}
+
+		return 0;
 	}
-	int i_inicio = 0, i_fim = 0;
-    int j_inicio = n-1, j_fim = n-1; 
-
-	Dijkstra(i_inicio,i_fim); // rodamos o Dijkstra
-	cout << distancia[j_inicio][j_fim] << endl; // imprimimos a resposta
-	
-	return 0;
-}
-

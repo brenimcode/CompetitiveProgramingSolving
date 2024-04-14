@@ -1,51 +1,45 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+#define NMAX 2010
+#define int long long
 
-#define maxn 5000
-#define maxv 100
-typedef long long ll;
+int peso[NMAX], valor[NMAX]; // Valores e pesos dos Objetos
+int tab[NMAX][NMAX]; //Tabela de DP para salvar os estados
+int n;
 
-ll p[6];
-int sum = 0;
 
-int saque(int n, int s){
-    if(n == 0){
-        if(s == 0){
-            sum++;
-            return 1;
-        }
-        return 0;
+int knap(int obj, int capacidade){
+
+    if(tab[obj][capacidade] != -1) return tab[obj][capacidade];
+
+    if(obj == n+1 || capacidade == 0) return tab[obj][capacidade] = 0;
+
+    int nao_coloca = knap(obj+1,capacidade);
+
+    if(peso[obj] <= capacidade){ //O objeto cabe na mochila?
+        int coloca = valor[obj] + knap(obj+1,capacidade-peso[obj]);
+
+        return tab[obj][capacidade] = max(nao_coloca,coloca);
     }
-    int aux = saque(n-1,s);
-    if(aux == 0 && p[n]<=s)
-        aux = saque(n-1,s-p[n]);
-    sum++;
-    return aux;
-}
-
-int memo[maxn][maxv];
-
-int t(int idx,int val){
-    if(memo[idx][val] == -1){
-        //calcula 
-        memo[idx][val] = min(1+t(idx,val-s[idx]),f(idx+1,val)); // memo recebe o minimo entre pegar uma moeda duas vezes, e nao pegar novamente;
-
-    }
-    return memo[idx][val];
+    
+    return tab[obj][capacidade] = nao_coloca; // O objeto nao coube na mochila, logo nao podemos colocar
 
 }
 
-
-int main(){
-    ll s;
-    cin >> s; //saque
-    for(int i=0;i<6;i++){
-        cin >> p[i];
+int32_t main()
+{
+    int p,i,aux1,aux2; // P é a capacidade, N é a qtd de itens
+    cin >> p >> n;
+    for (i = 1; i <= n; i++)
+    {
+        cin >> aux1 >> aux2; // aux1 = peso, aux2 = valor
+        peso[i] = aux1;
+        valor[i] = aux2;
     }
-     //numero de notas de 2,5,10,50,100 disponvieis p[2,5,10,20,50,100]
-    saque(6,s);
-    cout << sum;
+    memset(tab,-1, sizeof tab); //Inicializa com -1
 
+    cout << knap(1,p); //Chamo a knapsack e printo
 
+    return 0;
 }
