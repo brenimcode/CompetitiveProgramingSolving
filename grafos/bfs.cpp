@@ -11,10 +11,10 @@ int cont;
 void BFS(int x){
 
 	queue<int> fila;
-	fila.push(x); // fila da nossa BFS, começa colocando o vertice X
+	fila.push(x); // fila da nossa BFS, comeÃ§a colocando o vertice X
 	dist[x] = x; // colocamos o valor adequado aqui
 
-	while(!fila.empty()){ // Enquanto a fila não for vazia
+	while(!fila.empty()){ // Enquanto a fila nao for vazia
 
 		// vamos trabalhar com o primeiro da fila
 		int v = fila.front();
@@ -25,7 +25,7 @@ void BFS(int x){
 			int u = grafo[v][i];
 			if(dist[u] == -1)   {
 
-				// se u ainda não tiver sido visitado, o acrescentamos a fila
+				// se u ainda nï¿½o tiver sido visitado, o acrescentamos a fila
 				dist[u] = v;
 				fila.push(u);
 			}
