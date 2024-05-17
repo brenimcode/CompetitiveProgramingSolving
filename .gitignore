@@ -1,0 +1,20 @@
+# Arquivos de compilação e executáveis
+*.o
+*.out
+*.exe
+
+# Diretório de compilação
+build/
+bin/
+
+# Arquivos gerados pelo CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Arquivos gerados pelo VS Code
+.vscode/
+
+# Pasta de saída
+output/
