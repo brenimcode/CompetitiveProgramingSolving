@@ -24,7 +24,6 @@ int knap(int obj, int capacidade){
     }
     
     return tab[obj][capacidade] = nao_coloca; // O objeto nao coube na mochila, logo nao podemos colocar
-
 }
 
 int32_t main()
