@@ -10,19 +10,27 @@ int cont;
 
 void dfsR(int vertice){
     visitados[vertice] = cont++;
-    
+    // vertice 1
+    // Visitar Todos vertices vizinhos
     for (int a = 0; a < (int) grafo[vertice].size(); a++)
     {
-        int adjascente = grafo[vertice][a];
+        int adjascente = grafo[vertice][a]; // adj =  2
         if(visitados[adjascente] == -1)
             dfsR(adjascente);
     }
     
-
 }
 
 
 void GrafoDSR(int n){
+
+/*
+1 -> 2, 4   [0]
+2 -> 1    [1]
+3 -> 2     [3]
+4 -> /    [2]
+*/
+
     cont=0;//Para assinar em qual momento o vertice foi visitado.
     int i; 
     for(i = 0;i<n;i++)
@@ -51,7 +59,6 @@ int main(){
     int n;
     cin >> n;
     GrafoDSR(n);
-
 
     for (int i = 1; i < n; i++)
     {

@@ -5,6 +5,10 @@ using namespace std;
 #define NMAX 27
 
 vector <char> grafo[NMAX];
+ // 'A' -> 'B'
+ // 'B' -> 'A' , 'C'
+
+
 int componente[NMAX];
 int cont;
 int num_componentes;
@@ -16,12 +20,11 @@ void dfsR(int vertice){
     {
         int adjascente = grafo[vertice][a];
         if(componente[adjascente] == -1){
-            componente[adjascente] = componente[vertice];
+            componente[adjascente] = componente[vertice]; // Todos q eu consigo chegar pelo 0, vai ser componente 0, 
             dfsR(adjascente);
 
         }
     }
-    
 
 }
 
@@ -32,16 +35,18 @@ void GrafoDSR(int n){
         componente[i] = -1;
     }
 
+    // 1 = [-1], 2 = [-1], 3 = [-1] ...
+
+
     for(i = 0;i<n;i++){
         if(componente[i] == -1){
-            num_componentes++;
-            componente[i] = i;
-            comp.push_back(componente[i]);
+            num_componentes++; 
+            componente[i] = i; // Componente[0] = 0; [0] [0] [0] [0] [0] [6]
+            comp.push_back(componente[i]); // [0] [6]
             dfsR(i);
         }
     }
 }
-
 
 int main(){
 
@@ -54,14 +59,14 @@ int main(){
         cin >> V >> E; // Vertices e EDGES(ARESTAS)
         printf("Case #%d:\n\n",caso++);
         for(j=0;j<E;j++){
-            cin.ignore();
+            
             cin >> a;
-            cin.ignore();
             cin >> b;
              //CHAR A E B //'a' representa o 0
             // (a,b)
             grafo[a-'a'].push_back(b-'a');
             grafo[b-'a'].push_back(a-'a');
+
         }
         GrafoDSR(V); //preenche as componentes
         for (k = 0; k < num_componentes; k++)
@@ -75,6 +80,7 @@ int main(){
                 }
                 printf("\n");
         }
+
 
         printf("%d connected components\n",num_componentes);
 
