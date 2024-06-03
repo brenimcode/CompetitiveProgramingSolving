@@ -3,15 +3,13 @@
 using namespace std;
 
 #define int long long // Define 'long long' como 'int'
-#define NMAX 1000 // Tamanho máximo do vetor
 
-int32_t main() { // Função principal
+int32_t main() {
     int i, n, l, f, result = 0, j; // Declaração das variáveis
     
     cin >> n >> l >> f; // Leitura do tamanho do vetor (n) e dos limites (l e f)
-    int vet[n]; // Declaração do vetor de tamanho n
+    int vet[n];
     
-    // Leitura dos elementos do vetor
     for (i = 0; i < n; i++) {
         cin >> vet[i];        
     }
