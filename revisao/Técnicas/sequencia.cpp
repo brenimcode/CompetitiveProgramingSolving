@@ -6,8 +6,8 @@ using namespace std;
 
 int32_t main() {
     _
-    int n, x;
-    cin >> n >> x;  // tamanho do array e da soma alvo.
+    int n, l, h;
+    cin >> n >> l >> h;  // tamanho do array, l = cota inferior, h = cota superior.
     vector<int> arr(n);
     for (int i = 0; i < n; i++) {
         cin >> arr[i]; 

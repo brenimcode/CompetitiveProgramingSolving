@@ -1,61 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, x;
+#define int long long
+#define _ ios_base::sync_with_stdio(0); cin.tie(0);
 
-int subArray(const vector<int> &arr, int k)
-{
-    unordered_map<int, int> mpp;
-    int preSum = 0, cnt = 0;
-
-    mpp[0] = 1; // Setting 0 in the map.
-    for (int i = 0; i < n; i++)
-    {
-        // add current element to prefix Sum:
-        preSum += arr[i];
-
-        // Calculate x-k:
-        int remove = preSum - k;
-
-        // Add the number of subarrays to be removed:
-        cnt += mpp[remove];
-
-        // Update the count of prefix sum
-        // in the map.
-        mpp[preSum] += 1;
-    }
-    return cnt;
-}
-
-int main()
-{
-    cin >> n >> x;
+int32_t main() {
+    _
+    int n, x;
+    cin >> n >> x;  // tamanho do array e da soma alvo.
     vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i]; 
     }
 
-    unordered_map<int, int> mpp;
-    int preSum = 0, cnt = 0;
-    mpp[0] = 1; // Setting 0 in the map.
-    for (int i = 0; i < n; i++)
-    {
-        // add current element to prefix Sum:
-        preSum += arr[i];
+    // Algoritmo Subarray Sum Equals X
+    unordered_map<int, int> prefixSomas;
+    int somaAtual = 0, contador = 0;
+    prefixSomas[0] = 1;  // soma prefixada 0 ocorre 1 vez
 
-        // Calculate x-k:
-        int remove = preSum - x;
-
-        // Add the number of subarrays to be removed:
-        cnt += mpp[remove];
-
-        // Update the count of prefix sum
-        // in the map.
-        mpp[preSum] += 1;
+    for (int i = 0; i < n; i++) {
+        somaAtual += arr[i];  // Adiciona o elemento atual à soma prefixada.
+        int remover = somaAtual - x;  // Calcula o valor que precisamos encontrar.
+        // Verifica se a soma `somaAtual - x` já ocorreu.
+        if (prefixSomas.find(remover) != prefixSomas.end()) {
+            contador += prefixSomas[remover];  // Incrementa o contador.
+        }
+        // Atualiza o mapa com a soma prefixada atual.
+        prefixSomas[somaAtual]++;
     }
 
-    cout << cnt << endl;
+    cout << contador << endl;  // Imprime o número de subarrays com soma exatamente igual a x.
 
     return 0;
 }
