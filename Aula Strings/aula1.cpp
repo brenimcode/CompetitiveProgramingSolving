@@ -4,11 +4,16 @@
 using namespace std;
 
 int main(){
-    string str;
-    getline(cin,str);
-    cout << str << endl;
-    reverse(str.begin(), str.end());
-    cout << str << endl;
-   // [0,1,2,3,4] 
+    // char STRING[100]; DESELAGENTE
 
+    string str;
+    //cin >> str; // le ate o ' '
+    getline(cin,str); // LE A LINHA INTEIRA
+    cout << str << "\n"; // PRINTA
+    str += "1";
+    cout << str << "\n"; // PRINTA
+    str.size();
+    int t = str.length();
+
+    cout << t << endl;
 }
