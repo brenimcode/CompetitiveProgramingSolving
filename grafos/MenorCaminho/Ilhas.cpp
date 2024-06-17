@@ -5,6 +5,14 @@ using namespace std;
 // Definindo um tipo de dado para representar um par de inteiros (PESO, VERTICE)
 typedef pair<int, int> Par;
 
+
+/*
+    1: {PESO,2}, 3
+    2: 4,5
+    3: -> NULL
+    4: -> NULL
+    5: -> NULL
+    */
 // Definindo constantes para o número máximo de vértices e o valor de infinito
 const int MAXN = 1e5 + 10;
 const int INFINITO = 1e9 + 10;
@@ -74,7 +82,7 @@ int main() {
     for (int i = 0; i < M; i++) {
         int u, v, w;
         cin >> u >> v >> w;
-        grafo[u].push_back({w, v});
+        grafo[u].push_back({w, v}); // BIDIERCIONAL
         grafo[v].push_back({w, u});
     }
     int servidor;

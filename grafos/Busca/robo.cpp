@@ -4,8 +4,9 @@ using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
 #define NMAX 1002
 
-int dI[4] = {1, -1, 0, 0};
-int dj[4] = {0, 0, 1, -1};
+int dI[4] = {1, -1, 0, 0}; // linha
+int dj[4] = {0, 0, 1, -1}; // coluna
+
 int n, m, a, b;
 int x,y;
 int mat[NMAX][NMAX];
@@ -19,10 +20,10 @@ void dfs(int i, int j)
         int vizI = i + dI[k];
         int vizJ = j + dj[k];
 
-        if (vizI > n || vizI <= 0 || vizJ > m || vizJ <= 0)
+        if (vizI > n || vizI <= 0 || vizJ > m || vizJ <= 0) // verificar se fora da matriz
             continue;
 
-        if (mat[vizI][vizJ] == 1)
+        if (mat[vizI][vizJ] == 1) // verifica se é um caminho valido
         {
             ver = 1;
             dfs(vizI, vizJ);
@@ -31,9 +32,7 @@ void dfs(int i, int j)
     if(ver == 0){
         x = i;
         y = j;
-    
     }
-
 }
 
 int main()
