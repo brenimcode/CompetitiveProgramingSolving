@@ -8,8 +8,8 @@ vector <int> grafo[NMAX];
 int dist[NMAX];
 int cont;
 
-void BFS(int x){ 
-
+void BFS(int x){ // Faz uma busca em largura a partir do vertice X ( O (n+m) )
+    memset(dist,-1, sizeof dist);
 	queue<int> fila; // fila para armazenar os vertices.
 	fila.push(x); // fila da nossa BFS, começa colocando o vertice X
 	dist[x] = 0; // colocamos o valor adequado aqui
@@ -42,9 +42,6 @@ int main(){
     */
    
    int i;
-    for(i=0;i<6;i++){
-        dist[i] = -1;
-    }
 
     grafo[1].push_back(2); grafo[1].push_back(3); //Vertice 1 se liga ao V[2] e V[3]
     grafo[2].push_back(4); grafo[2].push_back(5); // Vertice 2 se liga ao V[4] e V[5]

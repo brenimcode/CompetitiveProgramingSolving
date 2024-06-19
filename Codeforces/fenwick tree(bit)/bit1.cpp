@@ -8,7 +8,6 @@ int bit[NMAX], n;
 
 // atualiza o valor v em v[X]
 void upd(int x, int v){
-    
     //Itera sobre todos indices "relevantes", o pai do indice i é ( i + lsb(i) )
     // lsb(i) = (x * -x);
     while(x <= n){ 
