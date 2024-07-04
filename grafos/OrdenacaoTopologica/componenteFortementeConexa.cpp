@@ -1,0 +1,10 @@
+/*
+
+Algoritmo de Kosaraju
+
+
+
+
+
+
+*/
