@@ -16,7 +16,6 @@ int32_t main()
     {
         int x,y,k;
         cin >> x >> y >> k;
-
         int ans;
         cout << ans << endl;
     }
