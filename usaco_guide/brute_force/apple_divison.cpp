@@ -1,34 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
+int n;
+vector<long long> pesos;
 
-#define DEBUG(x) cout << #x << " >>>> " << x << endl;
+ll distribui_macas(int indice, ll soma1, ll soma2) {
+    // Se já adicionamos todas as maçãs, retorna a diferença absoluta entre os dois grupos
+    if (indice == n) { return abs(soma1 - soma2); }
 
-int main()
-{
-    int n;
-    cin >>n;
-    int vet[n];
-    for (int i = 0; i < n;i++)
-    {
-        cin >> vet[i];
-    }
-    int max = 0;
+    // Tenta adicionar a maçã atual ao primeiro ou ao segundo grupo
+    return min(distribui_macas(indice + 1, soma1 + pesos[indice], soma2),
+               distribui_macas(indice + 1, soma1, soma2 + pesos[indice]));
+}
 
-    sort(vet,vet+n);
-    int group1 = 0;
-    int group2 = 0;
-    for (int i = 0; i < n/2 ;i+=2)
-    {
-        group1 += vet[i] + vet[n-i];
-        group2 += vet[i+1] + vet[n-i];
-    }
+int main() {
+    cin >> n;
+    pesos.resize(n);
+    for (int i = 0; i < n; i++) { cin >> pesos[i]; }
 
-    max = abs(group1-group2);
-
-
-
-
-    cout << max << endl;
-    return 0;
+    // Resolve o problema começando na maçã 0 com ambos os grupos vazios
+    cout << distribui_macas(0, 0, 0) << endl;
 }
